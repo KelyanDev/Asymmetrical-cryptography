@@ -1,25 +1,43 @@
-def ascii_encrypt(M):
-    return(ord(M))
+def ascii_encrypt(lett):
+    return(ord(lett))
 
-def encryption(M,Pc):
-    Lc= M+Pc
-    return Lc
+def encryption(lett,Part_key):
+    crypt_lett= lett+Part_key
+    return crypt_lett
 
-def ascii_decrypt(M):
-    return(chr(M))
+def decryption(lett,Part_key):
+    uncrypt_lett= lett-Part_key
+    return uncrypt_lett
 
-def encrypt(Mess,cle):
-    mess_crypt=""
-    cle=str(cle)
-    y=0
-    L=len(cle)
+def ascii_decrypt(lett):
+    return(chr(lett))
+
+def encrypt(Mess,key):
+    crypted_mess=""
+    key=str(key)
+    z=0
     for i in Mess:
-        if y>L:
-            y=0
-        mess_chiffr=ascii_encrypt(i)
-        part_cle=int(y)
-        lett_crypt=encryption(mess_chiffr,part_cle)
-        lett_fin=ascii_decrypt(lett_crypt)
-        mess_crypt+=lett_fin
-        y+=1
-    return mess_crypt
+        if z>=len(key):
+            z=0
+        part_key=int(key[z])
+        ascii_mess=ascii_encrypt(i)
+        crypt_lett=encryption(ascii_mess,part_key)
+        final_lett=ascii_decrypt(crypt_lett)
+        crypted_mess+=final_lett
+        z+=1
+    return crypted_mess
+
+def decrypt(Mess,key):
+    decrypted=""
+    key=str(key)
+    z=0
+    for i in Mess:
+        if z>=len(key):
+            z=0
+        part_key=int(key[z])
+        ascii_mess=ascii_encrypt(i)
+        uncrypt_lett=decryption(ascii_mess,part_key)
+        final_lett=ascii_decrypt(uncrypt_lett)
+        decrypted+=final_lett
+        z+=1
+    return decrypted
